@@ -12,7 +12,7 @@ import { projects } from "@/data/projects"
       <v-row justify="center">
         <div style="width: 80%">
           <v-img
-            src="/photo.jpg"
+            src="/photo_white2.jpg"
             class="d-none d-md-block w">
           </v-img>
         </div>
@@ -21,7 +21,7 @@ import { projects } from "@/data/projects"
           class="d-md-none"
           style="">
           <v-img
-            src="/photo.jpg">
+            src="/close_photo2.jpg">
           </v-img>
         </v-avatar>
       </v-row>
@@ -30,26 +30,34 @@ import { projects } from "@/data/projects"
       <v-card variant="text">
         <v-card-item>
           <v-card-title class="pb-2 pt-2">
-            <h2 style="text-align: center;">Shengyu Liu | 刘胜与</h2>
+            <h2 style="text-align: center;">Yuzheng Liu | 刘宇政</h2>
           </v-card-title>
           <v-card-text class="mt-4">
             <p style="margin-top: 14px;">
-              I am currently a senior student in the <a href="https://cfcs.pku.edu.cn/english/research/turing_program/introduction1/index.htm">Turing Class</a> at <a href="https://eecs.pku.edu.cn/en/">the School of EECS</a>, <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>, enrolled since September 2021.
+
+              I am currently a 4th-year undergraduate student at the School of EECS, 
+              <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>,
+              supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
+              As a member of <a href="https://vcl.pku.edu.cn/">Visual Computing and Learning Lab (VCL)</a>, 
+              I'm also fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
+              and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
             </p>
             <p style="margin-top: 8px">
-              Under the advisement of Prof. <a href="https://xinjin.github.io/index.html">Xin Jin</a>, my research focuses on <b>Machine Learning Systems (MLSys)</b>, <b>Machine Learning Compilers</b>, and <b>Distributed Systems</b>.
+              My research focuses on <b>3D computer Vision</b> and <b>Computer graphics</b>.
+              I am passionate about integrating human priors about the three-dimensional world with large models to enhance <b>3D scene understanding</b>.
+              I am also interested in leveraging deep learning methods to address traditional challenges in computer graphics, such as <b>3D scene reconstruction</b>.
             </p>
-            <p style="margin-top: 8px">
-              I was also the <b>team leader</b> of the Peking University Supercomputing Team, and we won the <b>First Place</b> at the 10th ASC and the <b>Second Place</b> at SC23 (both are top-tier Supercomputing competitions in the world).
-            </p>
+            <!-- <p style="margin-top: 8px">
+              I am also the captain of the Chinese Kung Fu team at PKU.
+            </p> -->
             <div class="mt-6" style="text-align: center">
               <p style="font-size: 15px;">
-                Email: <a href="mailto:shengyu.liu@stu.pku.edu.cn">shengyu.liu@stu.pku.edu.cn</a> <br />
+                Email: <a href="mailto:liu_yuzheng@stu.pku.edu.cn">liu_yuzheng@stu.pku.edu.cn</a> <br />
               </p>
-              <a href="https://scholar.google.com/citations?hl=en&user=tkx4NIUAAAAJ">Google Scholar</a> / 
-              <a href="https://github.com/interestingLSY">GitHub</a> / 
-              <a href="/cv-shengyuliu.pdf">My CV</a> /
-              <a href="/wechat-qrcode.png">WeChat</a>
+              <a href="https://scholar.google.com/citations?user=_0ELEBMAAAAJ&hl=zh-CN&oi=ao">Google Scholar</a> / 
+              <a href="https://github.com/Ly-kc">GitHub</a> 
+              <!-- <a href="/cv-shengyuliu.pdf">My CV</a> / -->
+              <!-- <a href="/wechat-qrcode.png">WeChat</a> -->
             </div>
           </v-card-text>
         </v-card-item>
@@ -78,11 +86,34 @@ import { projects } from "@/data/projects"
           </v-col>
           <v-divider vertical></v-divider>
           <v-col cols="12" md="9">
-            <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 17px"></a>
-            <p v-html="publication.authors" style="font-size: 14px"></p>
-            <p v-html="publication.description" style="font-size: 14px; color: #999; margin-top: 5px;"></p>
-            <p v-html="publication.time" style="font-size: 14px; color: #999; margin-top: 5px;"></p>
-            <p v-html="publication.submit_status" style="font-size: 14px; color: #555; margin-top: 5px;"></p>
+            <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 20px; font-weight: 600; color: #333;"></a>
+            <!-- <p v-html="publication.title" style="font-size: 20px" class="mb-1"></p> -->
+            <p v-html="publication.authors" style="font-size: 15px; margin-top: 2px;"></p>
+            <p v-html="publication.submit_status" style="font-size: 16px; color: #555; margin-top: 2px;"></p>
+
+            <!-- <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px" no-gutters>
+              <v-col v-if="publication.arxiv" cols="1">
+                <a :href="publication.arxiv" target="_blank">ArXiv</a>
+              </v-col>
+              <v-col v-if="publication.page" cols="2">
+                <a :href="publication.page" target="_blank">Project Page</a>
+              </v-col>
+              <v-col v-if="publication.code" cols="1">
+                <a :href="publication.code" target="_blank">Code</a>
+              </v-col>
+            </v-row> -->
+            <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px; display: flex; flex-wrap: nowrap;">
+              <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
+                <a :href="publication.arxiv" target="_blank">ArXiv</a>
+              </v-col>
+              <v-col v-if="publication.page" cols="auto" style="margin-right: 2px;">
+                <a :href="publication.page" target="_blank">Project Page</a>
+              </v-col>
+              <v-col v-if="publication.code" cols="auto">
+                <a :href="publication.code" target="_blank">Code</a>
+              </v-col>
+            </v-row>
+            <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>
           </v-col>
         </v-row>
         <p style="color: #888; font-size: 14px; margin-top: 20px;">*: Equal contribution</p>

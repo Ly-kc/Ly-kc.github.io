@@ -15,7 +15,7 @@ import { ref } from "vue"
 			variant="flat"
 			:active="false"
 			style="display: flex; align-items: center; height: 100%">
-				<span style="font-size: 20px;">Shengyu Liu</span>
+				<span style="font-size: 20px;">Yuzheng Liu</span>
 			</v-btn>
 			<v-divider vertical class="mr-8"></v-divider>
 			<v-btn
