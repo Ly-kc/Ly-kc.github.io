@@ -12,6 +12,18 @@ const projects: Project[] = [
 		time: "2024.01",
 		link: "https://github.com/Ly-kc/Pitorch"
 	},
+	{
+		name: "Segment Anything on BTCV",
+		description: "Finetune SAM to conduct sementic segmentation on the BTCV dataset, </br> which is the final project of class <a href='https://youchengli.com/teaching/machine_learning_23_fall.html'>'Machine Learning'</a>.",
+		time: "2024.01",
+		link: "https://github.com/Ly-kc/SAM-ON-BTCV"
+	},
+	{
+		name: "Course Resource Manager",
+		description: "A course resource manager implemented using Qt,</br> which is the final project of class 'Practice of Programming in C&C++'.",
+		time: "2022.06",
+		link: "https://youchengli.com/teaching/machine_learning_23_fall.html"
+	},
 ]
 
 export {projects, type Project}

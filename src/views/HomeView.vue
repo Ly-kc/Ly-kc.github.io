@@ -43,9 +43,9 @@ import { projects } from "@/data/projects"
               and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
             </p>
             <p style="margin-top: 8px">
-              My research focuses on <b>3D computer Vision</b> and <b>Computer graphics</b>.
+              My research focuses on <b>3D computer Vision</b>.
               I am passionate about integrating human priors about the three-dimensional world with large models to enhance <b>3D scene understanding</b>.
-              I am also interested in leveraging deep learning methods to address traditional challenges in computer graphics, such as <b>3D scene reconstruction</b>.
+              I am also interested in leveraging deep learning methods to address traditional challenges in <b>computer graphics</b>, such as <b>3D scene reconstruction</b>.
             </p>
             <!-- <p style="margin-top: 8px">
               I am also the captain of the Chinese Kung Fu team at PKU.
@@ -80,28 +80,46 @@ import { projects } from "@/data/projects"
         <h2 class="card-title">Publications</h2>
       </v-card-title>
       <v-card-item>
-        <v-row v-for="publication in publications" class="mt-4">
-          <v-col cols="12" md="3">
+        <!-- <v-row v-for="publication in publications" class="mt-4">
+          <v-col cols="15" md="3">
             <v-img :src="publication.img_path" style="max-width: 280px;"></v-img>
           </v-col>
           <v-divider vertical></v-divider>
           <v-col cols="12" md="9">
             <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 20px; font-weight: 600; color: #333;"></a>
-            <!-- <p v-html="publication.title" style="font-size: 20px" class="mb-1"></p> -->
             <p v-html="publication.authors" style="font-size: 15px; margin-top: 2px;"></p>
             <p v-html="publication.submit_status" style="font-size: 16px; color: #555; margin-top: 2px;"></p>
-
-            <!-- <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px" no-gutters>
-              <v-col v-if="publication.arxiv" cols="1">
+            <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px; display: flex; flex-wrap: nowrap;">
+              <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
                 <a :href="publication.arxiv" target="_blank">ArXiv</a>
               </v-col>
-              <v-col v-if="publication.page" cols="2">
+              <v-col v-if="publication.page" cols="auto" style="margin-right: 2px;">
                 <a :href="publication.page" target="_blank">Project Page</a>
               </v-col>
-              <v-col v-if="publication.code" cols="1">
+              <v-col v-if="publication.code" cols="auto">
                 <a :href="publication.code" target="_blank">Code</a>
               </v-col>
-            </v-row> -->
+            </v-row>
+            <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>
+          </v-col>
+        </v-row> -->
+        
+        <v-row v-for="publication in publications" style="display: flex; align-items: center; margin-bottom: 20px;" >
+          <!-- 图片列 -->
+          <!-- <v-col cols="auto" style="margin-right: 16px;">
+            <v-img :src="publication.img_path" style="max-width: 280px; display: block;"></v-img>
+          </v-col> -->
+          <v-col cols="15" md="3" style="max-width: 280px;">
+            <v-img :src="publication.img_path" style="max-width: 280px;"></v-img>
+          </v-col>
+          <!-- 垂直分隔线 -->
+          <v-divider vertical></v-divider>
+
+          <!-- 内容列 -->
+          <v-col cols="12" md="9">
+            <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 20px; font-weight: 600; color: #333;"></a>
+            <p v-html="publication.authors" style="font-size: 15px; margin-top: 2px;"></p>
+            <p v-html="publication.submit_status" style="font-size: 16px; color: #555; margin-top: 2px;"></p>
             <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px; display: flex; flex-wrap: nowrap;">
               <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
                 <a :href="publication.arxiv" target="_blank">ArXiv</a>
@@ -116,7 +134,9 @@ import { projects } from "@/data/projects"
             <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>
           </v-col>
         </v-row>
-        <p style="color: #888; font-size: 14px; margin-top: 20px;">*: Equal contribution</p>
+
+
+        <p style="color: #888; font-size: 14px; margin-top: 20px;">*: Equal contribution; †: Corresponding author</p>
       </v-card-item>
     </v-card-item>
   </v-card>
