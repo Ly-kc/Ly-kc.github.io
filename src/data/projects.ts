@@ -8,7 +8,7 @@ interface Project {
 const projects: Project[] = [
 	{
 		name: "Pitorch",
-		description: "The first AI framewrok designed by myself,</br> which is the final project of class 'Programming in Artificial Intelligence'.",
+		description: "The first AI framewrok designed by myself,</br>utilizing CUDA and C++ as the backend and Python as the frontend,</br> which is the final project of class 'Programming in Artificial Intelligence'.",
 		time: "2024.01",
 		link: "https://github.com/Ly-kc/Pitorch"
 	},
@@ -22,7 +22,7 @@ const projects: Project[] = [
 		name: "Course Resource Manager",
 		description: "A course resource manager implemented using Qt,</br> which is the final project of class 'Practice of Programming in C&C++'.",
 		time: "2022.06",
-		link: "https://youchengli.com/teaching/machine_learning_23_fall.html"
+		link: "https://github.com/Ly-kc/Course_resource_manager"
 	},
 ]
 

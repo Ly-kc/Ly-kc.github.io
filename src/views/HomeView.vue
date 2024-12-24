@@ -80,31 +80,8 @@ import { projects } from "@/data/projects"
         <h2 class="card-title">Publications</h2>
       </v-card-title>
       <v-card-item>
-        <!-- <v-row v-for="publication in publications" class="mt-4">
-          <v-col cols="15" md="3">
-            <v-img :src="publication.img_path" style="max-width: 280px;"></v-img>
-          </v-col>
-          <v-divider vertical></v-divider>
-          <v-col cols="12" md="9">
-            <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 20px; font-weight: 600; color: #333;"></a>
-            <p v-html="publication.authors" style="font-size: 15px; margin-top: 2px;"></p>
-            <p v-html="publication.submit_status" style="font-size: 16px; color: #555; margin-top: 2px;"></p>
-            <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px; display: flex; flex-wrap: nowrap;">
-              <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.arxiv" target="_blank">ArXiv</a>
-              </v-col>
-              <v-col v-if="publication.page" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.page" target="_blank">Project Page</a>
-              </v-col>
-              <v-col v-if="publication.code" cols="auto">
-                <a :href="publication.code" target="_blank">Code</a>
-              </v-col>
-            </v-row>
-            <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>
-          </v-col>
-        </v-row> -->
         
-        <v-row v-for="publication in publications" style="display: flex; align-items: center; margin-bottom: 20px;" >
+        <v-row v-for="publication in publications" style="display: flex; align-items: center; margin-top: 0px; margin-bottom: 20px;" >
           <!-- 图片列 -->
           <!-- <v-col cols="auto" style="margin-right: 16px;">
             <v-img :src="publication.img_path" style="max-width: 280px; display: block;"></v-img>
@@ -197,7 +174,7 @@ import { projects } from "@/data/projects"
         Feel free to steal this website's source code at <a href="https://github.com/interestingLSY/interestingLSY.github.io" target="_blank">GitHub</a>
       </p>
       <p style="text-align: center;" class="mt-2">
-        <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Finterestinglsy.github.io&count_bg=%2388eeff&title_bg=%23DDDDDD&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true"/></a>
+        <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fly-kc.github.io&count_bg=%2388EEFF&title_bg=%23DDDDDD&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true"/></a>
       </p>
     </v-col>
   </v-row>

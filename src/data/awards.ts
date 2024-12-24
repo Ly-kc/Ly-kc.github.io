@@ -11,6 +11,26 @@ const awards: Award[] = [
 		// description: "Top 15% in the class"
 		description: ""
 	},
+	{
+		year: "2023",
+		name: "The Okamatsu Scholarship",
+		description: ""
+	},
+	{
+		year: "2023",
+		name: "Huawei Scholarship",
+		description: ""
+	},
+	{
+		year: "2022",
+		name: "Award for Academic Excellence of Peking University",
+		description: ""
+	},
+	{
+		year: "2022",
+		name: "UBIQUANT Scholarship",
+		description: ""
+	},
 ];
 
 export {awards, type Award}
