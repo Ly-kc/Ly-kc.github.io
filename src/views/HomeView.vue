@@ -12,8 +12,8 @@ import { projects } from "@/data/projects"
       <v-row justify="center">
         <div style="width: 80%">
           <v-img
-            src="/photo_white2.jpg"
-            class="d-none d-md-block w">
+          src="/photo_casual.jpg"
+          class="d-none d-md-block w">
           </v-img>
         </div>
         <v-avatar
