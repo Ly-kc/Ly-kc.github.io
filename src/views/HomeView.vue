@@ -43,7 +43,7 @@ import { projects } from "@/data/projects"
               and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
             </p>
             <p style="margin-top: 8px">
-              My research focuses on <b>3D computer Vision</b>.
+              My research focuses on <b>3D computer vision</b>.
               I am passionate about integrating human priors about the three-dimensional world with large models to enhance <b>3D scene understanding</b>.
               I am also interested in leveraging deep learning methods to address traditional challenges in <b>computer graphics</b>, such as <b>3D scene reconstruction</b>.
             </p>
@@ -173,9 +173,9 @@ import { projects } from "@/data/projects"
         Built on <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a> and <a href="https://vuetifyjs.com/" target="_blank">Vuetify</a> <br />
         Feel free to steal this website's source code at <a href="https://github.com/interestingLSY/interestingLSY.github.io" target="_blank">GitHub</a>
       </p>
-      <p style="text-align: center;" class="mt-2">
+      <!-- <p style="text-align: center;" class="mt-2">
         <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fly-kc.github.io&count_bg=%2388EEFF&title_bg=%23DDDDDD&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true"/></a>
-      </p>
+      </p> -->
     </v-col>
   </v-row>
 </template>
