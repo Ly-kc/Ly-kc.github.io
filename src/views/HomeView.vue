@@ -12,7 +12,7 @@ import { projects } from "@/data/projects"
       <v-row justify="center">
         <div style="width: 80%">
           <v-img
-          src="/photo_casual.jpg"
+          src="/老龙头2.jpg" 
           class="d-none d-md-block w">
           </v-img>
         </div>
@@ -85,7 +85,7 @@ import { projects } from "@/data/projects"
           <!-- 图片列 -->
           <!-- <v-col cols="auto" style="margin-right: 16px;">
             <v-img :src="publication.img_path" style="max-width: 280px; display: block;"></v-img>
-          </v-col> -->
+          </v-col> --> 
           <v-col cols="15" md="3" style="max-width: 280px;">
             <v-img :src="publication.img_path" style="max-width: 280px;"></v-img>
           </v-col>
@@ -106,6 +106,14 @@ import { projects } from "@/data/projects"
               </v-col>
               <v-col v-if="publication.code" cols="auto">
                 <a :href="publication.code" target="_blank">Code</a>
+              </v-col>
+              <v-col v-if="publication.other_links" cols="auto">
+                <!-- other_links 中为 name-link pairs,遍历并显示他们:-->
+                <v-row v-for="(link, name) in publication.other_links" :key="name" style="margin-left: 2px;">
+                  <v-col cols="auto">
+                    <a :href="link" target="_blank">{{ name }}</a>
+                  </v-col>
+                </v-row>
               </v-col>
             </v-row>
             <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>

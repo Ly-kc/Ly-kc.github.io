@@ -9,20 +9,28 @@ interface Publication {
 	arxiv?: string;
 	page?: string;
 	code?: string;
+	// # optioanl fields, key-value pairs of name-link
+	other_links?: {
+		[key: string]: string;
+	};
 }
 
 const publications: Publication[] = [
 	{
 		title: "SLAM3R: Real-Time Dense Scene Reconstruction from Monocular RGB Videos",
-		authors: "<b>Yuzheng Liu</b>*, <a href='https://siyandong.github.io/'>Siyan Dong*</a>, <a href='https://ffrivera0.github.io/'>Shuzhe Wang</a>, <a href='https://yd-yin.github.io/'>Yingda Yin</a>, <a href='https://yanchaoyang.github.io/'>Yanchao Yang†</a>, <a href='https://fqnchina.github.io/'>Qingnan Fan</a>, <a href='https://baoquanchen.info/'>Baoquan Chen†</a>",
+		authors: "<b>Yuzheng Liu</b>*, <a href='https://siyandong.github.io/'>Siyan Dong*†</a>, <a href='https://ffrivera0.github.io/'>Shuzhe Wang</a>, <a href='https://yd-yin.github.io/'>Yingda Yin</a>, <a href='https://yanchaoyang.github.io/'>Yanchao Yang†</a>, <a href='https://fqnchina.github.io/'>Qingnan Fan</a>, <a href='https://baoquanchen.info/'>Baoquan Chen†</a>",
 		time: "2024.12",
-		img_path: "/publications/SLAM3R.jpg",
+		// img_path: "/publications/SLAM3R.jpg",
+		img_path: "/publications/slam3r_wild.gif",
 		description: "We design a real-time dense scene reconstruction system that regresses 3D points from video frames using feed-forward neural networks, without explicitly estimating camera parameters.",
 		submit_status: "CVPR 2025, <b>Highlight (13.5% of the accepted papers)</b> <br> \
-						Chia3DV 2025, <b>Top1 paper</b>",
+						China3DV 2025, <b>Top1 paper</b>",
 		link: "https://arxiv.org/abs/2412.09401",
 		arxiv: "https://arxiv.org/abs/2412.09401",
-		code: "https://github.com/PKU-VCL-3DV/SLAM3R"
+		code: "https://github.com/PKU-VCL-3DV/SLAM3R",
+		other_links: {
+			"机器之心(Chinese)": "https://mp.weixin.qq.com/s/fK5vJwbogcfwoduI9FuQ6w",
+		}
 	},
 	{
 		title: "SAI3D: Segment Any Instance in 3D Scenes",
