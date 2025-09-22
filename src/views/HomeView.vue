@@ -12,7 +12,7 @@ import { projects } from "@/data/projects"
       <v-row justify="center">
         <div style="width: 80%">
           <v-img
-          src="/老龙头2.jpg" 
+          src="/老龙头3.jpg" 
           class="d-none d-md-block w">
           </v-img>
         </div>
@@ -39,7 +39,7 @@ import { projects } from "@/data/projects"
               supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
               I earned my Bachelor's degree from the School of EECS, PKU in 2025.
               As a member of <a href="https://vcl.pku.edu.cn/">Visual Computing and Learning Lab (VCL)</a>, 
-              I'm also fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
+              I'm fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
               and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
             </p>
             <p style="margin-top: 8px">

@@ -8,12 +8,12 @@ const awards: Award[] = [
 	{
 		year: "2025",
 		name: "Peking University Outstanding Thesis Award",
-		description: " <b></b>"
+		description: ""
 	},
 	{
 		year: "2025",
 		name: "Outstanding Graduate of Peking University",
-		description: " <b></b>"
+		description: ""
 	},
 	{
 		year: "2025",
