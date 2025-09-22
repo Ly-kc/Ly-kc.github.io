@@ -7,6 +7,16 @@ interface Award {
 const awards: Award[] = [
 	{
 		year: "2025",
+		name: "Peking University Outstanding Thesis Award",
+		description: " <b></b>"
+	},
+	{
+		year: "2025",
+		name: "Outstanding Graduate of Peking University",
+		description: " <b></b>"
+	},
+	{
+		year: "2025",
 		name: "Top1 paper in China3DV 2025",
 		description: "Won the most votes <b>among 95 posters</b>"
 	},

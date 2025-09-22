@@ -34,10 +34,10 @@ import { projects } from "@/data/projects"
           </v-card-title>
           <v-card-text class="mt-4">
             <p style="margin-top: 14px;">
-
-              I am currently a 4th-year undergraduate student at the School of EECS, 
+              I am currently a Ph.D. candidate at the School of Artificial Intelligence, 
               <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>,
               supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
+              I earned my Bachelor's degree from the School of EECS, PKU in 2025.
               As a member of <a href="https://vcl.pku.edu.cn/">Visual Computing and Learning Lab (VCL)</a>, 
               I'm also fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
               and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
