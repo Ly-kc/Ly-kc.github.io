@@ -9,15 +9,15 @@ import { projects } from "@/data/projects"
 <template>
   <v-row class="mt-4" justify="center" id="card-overview">
     <v-col cols="6" md="3" align-self="center">
-      <v-row justify="center">
-        <div style="width: 80%">
+      <v-row justify="end">
+        <div style="width: 90%; max-width: 260px;">
           <v-img
           src="/老龙头3.jpg" 
           class="d-none d-md-block w">
           </v-img>
         </div>
         <v-avatar
-          size="150"
+          size="180"
           class="d-md-none"
           style="">
           <v-img
@@ -33,20 +33,42 @@ import { projects } from "@/data/projects"
             <h2 style="text-align: center;">Yuzheng Liu | 刘宇政</h2>
           </v-card-title>
           <v-card-text class="mt-4">
-            <p style="margin-top: 14px;">
-              I am currently a Ph.D. candidate at the School of Artificial Intelligence, 
-              <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>,
-              supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
-              I earned my Bachelor's degree from the School of EECS, PKU in 2025.
-              As a member of <a href="https://vcl.pku.edu.cn/">Visual Computing and Learning Lab (VCL)</a>, 
-              I'm fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
-              and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
-            </p>
-            <p style="margin-top: 8px">
-              My research focuses on <b>3D computer vision</b>.
-              I am passionate about integrating human priors about the three-dimensional world with large models to enhance <b>3D scene understanding</b>.
-              I am also interested in leveraging deep learning methods to address traditional challenges in <b>computer graphics</b>, such as <b>3D scene reconstruction</b>.
-            </p>
+            <div style="margin-top: 14px;">
+              <p style="font-size: 17px; font-weight: 600; margin-bottom: 4px;">
+                About Me
+              </p>
+              <p style="margin: 0; line-height: 1.6; font-size: 15px;">
+                I am currently a Ph.D. student at the School of Artificial Intelligence,
+                <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>,
+                supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
+                I earned my Bachelor's degree from the School of EECS, PKU in 2025.
+                As a member of <a href="https://vcl.pku.edu.cn/">Visual Computing and Learning Lab (VCL)</a>,
+                I'm fortunate to collaborate with Dr. <a href="https://yd-yin.github.io/">Yingda Yin</a>
+                and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
+              </p>
+            </div>
+            <div style="margin-top: 12px;">
+              <p style="font-size: 17px; font-weight: 600; margin-bottom: 4px;">
+                Research Interests
+              </p>
+              <ul style="margin: 0; padding-left: 18px; line-height: 1.6; font-size: 15px;">
+                <li>
+                  <span style="font-weight: 600;">Feed-forward 3D Reconstruction.</span>
+                  <span>
+                    Developing robust, real-time reconstruction systems capable of processing long-range sequences
+                    to establish a general-purpose foundation for 3D geometric perception.
+                  </span>
+                </li>
+                <li style="margin-top: 4px;">
+                  <span style="font-weight: 600;">Spatial Intelligence.</span>
+                  <span>
+                    Investigating the synergy between precise geometry and semantic understanding to empower
+                    MLLM-driven embodied agents with grounded spatial reasoning. I'm also interested in how
+                    reconstruction-driven representation and memory mechanisms can inform future World Models.
+                  </span>
+                </li>
+              </ul>
+            </div>
             <!-- <p style="margin-top: 8px">
               I am also the captain of the Chinese Kung Fu team at PKU.
             </p> -->
@@ -64,7 +86,7 @@ import { projects } from "@/data/projects"
       </v-card>
     </v-col>
   </v-row>
-  <v-divider class="mt-10 mb-4"></v-divider>
+  <v-divider class="mt-6 mb-4"></v-divider>
 
   <!-- <v-card variant="text" class="mt-4" id="card-news">
     <v-card-item>
