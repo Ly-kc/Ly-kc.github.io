@@ -39,7 +39,7 @@ const awards: Award[] = [
 	{
 		year: "2022",
 		name: "Award for Academic Excellence of Peking University",
-		description: "Peking University-level Aaward"
+		description: "Peking University-level Award"
 	},
 	{
 		year: "2022",

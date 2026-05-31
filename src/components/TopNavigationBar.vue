@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue"
+const navItems = [
+	{ title: "Home", shortTitle: "Home", href: "/#card-overview", icon: "mdi-home" },
+	{ title: "Publications", shortTitle: "Pubs", href: "/#card-publications", icon: "mdi-bookshelf" },
+	{ title: "Education", shortTitle: "Edu.", href: "/#card-education", icon: "mdi-timeline-text-outline" },
+	{ title: "Awards", shortTitle: "Awards", href: "/#card-awards", icon: "mdi-license" },
+	{ title: "Projects", shortTitle: "Projects", href: "/#card-projects", icon: "mdi-hammer-screwdriver" },
+]
 </script>
 
 <template>
@@ -8,7 +14,7 @@ import { ref } from "vue"
 	class="d-none d-md-block">
 		<template #default>
 			<v-spacer></v-spacer>
-			<v-btn 
+			<v-btn
 			to="/#card-overview"
 			class="mr-4 ml-4"
 			rounded="0"
@@ -19,47 +25,33 @@ import { ref } from "vue"
 			</v-btn>
 			<v-divider vertical class="mr-8"></v-divider>
 			<v-btn
-			to="/#card-overview"
+			v-for="item in navItems"
+			:key="item.title"
+			:to="item.href"
 			class="mr-4"
-			prepend-icon="mdi-home"
+			:prepend-icon="item.icon"
 			:active="false"
 			>
-				Home
-			</v-btn>
-			<!-- <v-btn
-			to="/#card-bio"
-			class="mr-4"
-			prepend-icon="mdi-account"
-			:active="false"
-			>
-				Bio
-			</v-btn> -->
-			<v-btn
-			to="/#card-publications"
-			class="mr-4"
-			prepend-icon="mdi-bookshelf"
-			:active="false"
-			>
-				Publications
-			</v-btn>
-			<v-btn
-			to="/#card-awards"
-			class="mr-4"
-			prepend-icon="mdi-license"
-			:active="false"
-			>
-				Awards
-			</v-btn>
-			<v-btn
-			to="/#card-projects"
-			class="mr-4"
-			prepend-icon="mdi-hammer-screwdriver"
-			:active="false"
-			>
-				Projects
+				{{ item.title }}
 			</v-btn>
 			<v-spacer></v-spacer>
 		</template>
-	</v-app-bar>    
-    
+	</v-app-bar>
+
+	<v-bottom-navigation
+	class="d-md-none mobile-navigation"
+	grow
+	mandatory
+	>
+		<v-btn
+		v-for="item in navItems"
+		:key="item.title"
+		:to="item.href"
+		:active="false"
+		>
+			<v-icon :icon="item.icon"></v-icon>
+			<span>{{ item.shortTitle }}</span>
+		</v-btn>
+	</v-bottom-navigation>
+
 </template>

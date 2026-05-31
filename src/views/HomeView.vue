@@ -1,23 +1,131 @@
 <script setup lang="ts">
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+import type { ComponentPublicInstance } from "vue"
 import { awards } from "@/data/awards"
+import { experiences } from "@/data/experience"
 import { publications } from "@/data/publications"
 import { projects } from "@/data/projects"
+
+const timelineRef = ref<HTMLElement | null>(null)
+const experienceBadges = ref<(HTMLElement | null)[]>([])
+const forkBox = ref({ width: 76, height: 1 })
+const forkPaths = ref<string[]>([])
+const githubStars = ref<Record<string, number | null | undefined>>({})
+let timelineObserver: ResizeObserver | undefined
+
+const forkViewBox = computed(() => `0 0 ${forkBox.value.width} ${forkBox.value.height}`)
+
+function formatStarCount(count: number | null | undefined) {
+  if (count === undefined) {
+    return "..."
+  }
+
+  if (count === null) {
+    return "--"
+  }
+
+  return String(count)
+}
+
+async function fetchGithubStars() {
+  const repos = publications
+    .map((publication) => publication.github_repo)
+    .filter((repo): repo is string => Boolean(repo))
+
+  await Promise.all(repos.map(async (repo) => {
+    if (githubStars.value[repo] !== undefined) {
+      return
+    }
+
+    githubStars.value = { ...githubStars.value, [repo]: undefined }
+
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repo}`)
+
+      if (!response.ok) {
+        throw new Error(`GitHub API responded with ${response.status}`)
+      }
+
+      const data = await response.json() as { stargazers_count?: number }
+      githubStars.value = { ...githubStars.value, [repo]: data.stargazers_count ?? null }
+    } catch {
+      githubStars.value = { ...githubStars.value, [repo]: null }
+    }
+  }))
+}
+
+function setExperienceBadge(el: Element | ComponentPublicInstance | null, index: number) {
+  experienceBadges.value[index] = el instanceof Element ? el as HTMLElement : null
+}
+
+function updateForkLines() {
+  const timeline = timelineRef.value
+  const badges = experienceBadges.value
+
+  if (!timeline || badges.length < 3 || badges.some((badge) => !badge)) {
+    return
+  }
+
+  const timelineRect = timeline.getBoundingClientRect()
+  const markerWidth = timeline.querySelector(".experience-marker")?.getBoundingClientRect().width ?? 76
+  const centers = badges.slice(0, 3).map((badge) => {
+    const rect = badge!.getBoundingClientRect()
+    return {
+      x: rect.left - timelineRect.left + rect.width / 2,
+      y: rect.top - timelineRect.top + rect.height / 2,
+    }
+  })
+
+  const [ant, phd, bachelor] = centers
+  const leftEdge = Math.max(6, Math.min(ant.x, phd.x, bachelor.x) - 24)
+  const shortBend = Math.max(leftEdge, bachelor.x - 16)
+  const longBend = Math.max(leftEdge, bachelor.x - 32)
+
+  forkBox.value = {
+    width: Math.ceil(markerWidth),
+    height: Math.ceil(timelineRect.height),
+  }
+  forkPaths.value = [
+    `M ${bachelor.x} ${bachelor.y} C ${shortBend} ${(bachelor.y + phd.y) / 2}, ${shortBend} ${(bachelor.y + phd.y) / 2}, ${phd.x} ${phd.y}`,
+    `M ${bachelor.x} ${bachelor.y} C ${longBend} ${bachelor.y - 56}, ${longBend} ${ant.y + 56}, ${ant.x} ${ant.y}`,
+  ]
+}
+
+function scheduleForkUpdate() {
+  void nextTick(() => {
+    updateForkLines()
+  })
+}
+
+onMounted(() => {
+  scheduleForkUpdate()
+  void fetchGithubStars()
+  timelineObserver = new ResizeObserver(scheduleForkUpdate)
+  if (timelineRef.value) {
+    timelineObserver.observe(timelineRef.value)
+  }
+  window.addEventListener("resize", scheduleForkUpdate)
+})
+
+onBeforeUnmount(() => {
+  timelineObserver?.disconnect()
+  window.removeEventListener("resize", scheduleForkUpdate)
+})
 </script>
 
 <template>
-  <v-row class="mt-4" justify="center" id="card-overview">
+  <v-row class="profile-section mt-4" justify="center" id="card-overview">
     <v-col cols="6" md="3" align-self="center">
       <v-row justify="end">
-        <div style="width: 90%; max-width: 260px;">
+        <div class="profile-photo-wrap">
           <v-img
-          src="/老龙头3.jpg" 
-          class="d-none d-md-block w">
+          src="/老龙头3.jpg"
+          class="d-none d-md-block profile-photo">
           </v-img>
         </div>
         <v-avatar
           size="180"
-          class="d-md-none"
-          style="">
+          class="d-md-none mobile-avatar">
           <v-img
             src="/close_photo2.jpg">
           </v-img>
@@ -25,17 +133,17 @@ import { projects } from "@/data/projects"
       </v-row>
     </v-col>
     <v-col cols="12" md="9" align-self="center">
-      <v-card variant="text">
+      <v-card variant="text" class="profile-card">
         <v-card-item>
           <v-card-title class="pb-2 pt-2">
-            <h2 style="text-align: center;">Yuzheng Liu | 刘宇政</h2>
+            <h2 class="profile-title">Yuzheng Liu | 刘宇政</h2>
           </v-card-title>
           <v-card-text class="mt-4">
-            <div style="margin-top: 14px;">
-              <p style="font-size: 17px; font-weight: 600; margin-bottom: 4px;">
+            <div class="profile-block">
+              <p class="section-label">
                 About Me
               </p>
-              <p style="margin: 0; line-height: 1.6; font-size: 15px;">
+              <p class="profile-copy">
                 I am currently a Ph.D. student at the School of Artificial Intelligence,
                 <a href="https://english.pku.edu.cn/">Peking University (PKU)</a>,
                 supervised by Prof. <a href="https://baoquanchen.info/">Baoquan Chen</a>.
@@ -45,24 +153,30 @@ import { projects } from "@/data/projects"
                 and Dr. <a href="https://siyandong.github.io/">Siyan Dong</a>.
               </p>
             </div>
-            <div style="margin-top: 12px;">
-              <p style="font-size: 17px; font-weight: 600; margin-bottom: 4px;">
+            <div class="profile-block">
+              <p class="section-label">
                 Research Interests
               </p>
-              <ul style="margin: 0; padding-left: 18px; line-height: 1.6; font-size: 15px;">
+              <ul class="interest-list">
                 <li>
-                  <span style="font-weight: 600;">Feed-forward 3D Reconstruction.</span>
+                  <span style="font-weight: 600;">3D Perception.</span>
                   <span>
-                    Developing robust, real-time reconstruction systems capable of processing long-range sequences
-                    to establish a general-purpose foundation for 3D geometric perception.
+                    Developing robust 3D perception systems for real-time scene reconstruction, segmentation,
+                    and spatial understanding from long-range visual inputs.
                   </span>
                 </li>
                 <li style="margin-top: 4px;">
-                  <span style="font-weight: 600;">Spatial Intelligence.</span>
+                  <span style="font-weight: 600;">Interactive Video Generation.</span>
                   <span>
-                    Investigating the synergy between precise geometry and semantic understanding to empower
-                    MLLM-driven embodied agents with grounded spatial reasoning. I'm also interested in how
-                    reconstruction-driven representation and memory mechanisms can inform future World Models.
+                    Exploring controllable and temporally consistent video generation models that can simulate
+                    dynamic worlds and support interactive prediction.
+                  </span>
+                </li>
+                <li style="margin-top: 4px;">
+                  <span style="font-weight: 600;">Multimodal Spatial Intelligence.</span>
+                  <span>
+                    Building multimodal LLM that connect language, visual and geometric understanding for
+                    spatial reasoning and embodied tasks in complex environments.
                   </span>
                 </li>
               </ul>
@@ -70,12 +184,12 @@ import { projects } from "@/data/projects"
             <!-- <p style="margin-top: 8px">
               I am also the captain of the Chinese Kung Fu team at PKU.
             </p> -->
-            <div class="mt-6" style="text-align: center">
-              <p style="font-size: 15px;">
+            <div class="contact-links mt-6">
+              <p>
                 Email: <a href="mailto:liu_yuzheng@stu.pku.edu.cn">liu_yuzheng@stu.pku.edu.cn</a> <br />
               </p>
-              <a href="https://scholar.google.com/citations?user=_0ELEBMAAAAJ&hl=zh-CN&oi=ao">Google Scholar</a> / 
-              <a href="https://github.com/Ly-kc">GitHub</a> 
+              <a href="https://scholar.google.com/citations?user=_0ELEBMAAAAJ&hl=zh-CN&oi=ao" target="_blank" rel="noopener noreferrer">Google Scholar</a> /
+              <a href="https://github.com/Ly-kc" target="_blank" rel="noopener noreferrer">GitHub</a>
               <!-- <a href="/cv-shengyuliu.pdf">My CV</a> / -->
               <!-- <a href="/wechat-qrcode.png">WeChat</a> -->
             </div>
@@ -100,49 +214,94 @@ import { projects } from "@/data/projects"
         <h2 class="card-title">Publications</h2>
       </v-card-title>
       <v-card-item>
-        
-        <v-row v-for="publication in publications" style="display: flex; align-items: center; margin-top: 0px; margin-bottom: 20px;" >
-          <!-- 图片列 -->
-          <!-- <v-col cols="auto" style="margin-right: 16px;">
-            <v-img :src="publication.img_path" style="max-width: 280px; display: block;"></v-img>
-          </v-col> --> 
-          <v-col cols="15" md="3" style="max-width: 280px;">
-            <v-img :src="publication.img_path" style="max-width: 280px;"></v-img>
-          </v-col>
-          <!-- 垂直分隔线 -->
-          <v-divider vertical></v-divider>
 
-          <!-- 内容列 -->
-          <v-col cols="12" md="9">
-            <a :href="publication.link" target="_blank" v-html="publication.title" style="font-size: 20px; font-weight: 600; color: #333;"></a>
-            <p v-html="publication.authors" style="font-size: 15px; margin-top: 2px;"></p>
-            <p v-html="publication.submit_status" style="font-size: 16px; color: #555; margin-top: 2px;"></p>
-            <v-row v-if="publication.arxiv || publication.page || publication.code" style="font-size: 15px; display: flex; flex-wrap: nowrap;">
+        <v-row
+          v-for="publication in publications"
+          :key="publication.title"
+          class="publication-row"
+        >
+          <v-col cols="12" md="3" class="publication-image-col">
+            <v-img :src="publication.img_path" class="publication-image"></v-img>
+          </v-col>
+          <v-divider vertical class="d-none d-md-block"></v-divider>
+
+          <v-col cols="12" md="9" class="publication-content">
+            <div class="publication-title-row">
+              <a :href="publication.link" target="_blank" rel="noopener noreferrer" v-html="publication.title" class="publication-title"></a>
+              <a
+                v-if="publication.github_repo && publication.code"
+                :href="publication.code"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="github-star-badge"
+              >
+                <span>Github</span>
+                <v-icon icon="mdi-star-outline" size="16"></v-icon>
+                <span>{{ formatStarCount(githubStars[publication.github_repo]) }}</span>
+              </a>
+            </div>
+            <p v-html="publication.authors" class="publication-authors"></p>
+            <p v-html="publication.submit_status" class="publication-status"></p>
+            <v-row v-if="publication.arxiv || publication.page || publication.code" class="publication-links">
               <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.arxiv" target="_blank">ArXiv</a>
+                <a :href="publication.arxiv" target="_blank" rel="noopener noreferrer">ArXiv</a>
               </v-col>
               <v-col v-if="publication.page" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.page" target="_blank">Project Page</a>
+                <a :href="publication.page" target="_blank" rel="noopener noreferrer">Project Page</a>
               </v-col>
               <v-col v-if="publication.code" cols="auto">
-                <a :href="publication.code" target="_blank">Code</a>
+                <a :href="publication.code" target="_blank" rel="noopener noreferrer">Code</a>
               </v-col>
               <v-col v-if="publication.other_links" cols="auto">
-                <!-- other_links 中为 name-link pairs,遍历并显示他们:-->
-                <v-row v-for="(link, name) in publication.other_links" :key="name" style="margin-left: 2px;">
+                <v-row v-for="(link, name) in publication.other_links" :key="name" class="publication-extra-link">
                   <v-col cols="auto">
-                    <a :href="link" target="_blank">{{ name }}</a>
+                    <a :href="link" target="_blank" rel="noopener noreferrer">{{ name }}</a>
                   </v-col>
                 </v-row>
               </v-col>
             </v-row>
-            <p v-html="publication.description" style="font-size: 16px; color: #777; margin-top: 2px;"></p>
+            <p v-html="publication.description" class="publication-description"></p>
           </v-col>
         </v-row>
 
 
-        <p style="color: #888; font-size: 14px; margin-top: 20px;">*: Equal contribution; †: Corresponding author</p>
+        <p class="publication-note">*: Equal contribution; †: Corresponding author</p>
       </v-card-item>
+    </v-card-item>
+  </v-card>
+
+  <v-card variant="text" class="mt-4" id="card-education">
+    <v-card-item>
+      <v-card-title>
+        <h2 class="card-title">Education & Experience</h2>
+      </v-card-title>
+      <v-card-text class="mt-5">
+        <div ref="timelineRef" class="experience-timeline">
+          <svg class="experience-fork-lines" :viewBox="forkViewBox" aria-hidden="true">
+            <path v-for="path in forkPaths" :key="path" :d="path"></path>
+          </svg>
+          <div
+            v-for="(experience, index) in experiences"
+            :key="`${experience.organization}-${experience.period}`"
+            class="experience-item"
+          >
+            <div class="experience-marker">
+              <div
+                :ref="(el) => setExperienceBadge(el, index)"
+                :class="['experience-badge', `experience-badge-${experience.variant}`]"
+              >
+                <img :src="experience.logo" :alt="`${experience.organization} logo`" class="experience-logo" />
+              </div>
+            </div>
+            <div class="experience-content">
+              <p class="experience-period">{{ experience.period }}</p>
+              <h3 class="experience-organization">{{ experience.organization }}</h3>
+              <p class="experience-role">{{ experience.role }}</p>
+              <p class="experience-description">{{ experience.description }}</p>
+            </div>
+          </div>
+        </div>
+      </v-card-text>
     </v-card-item>
   </v-card>
 
@@ -173,11 +332,11 @@ import { projects } from "@/data/projects"
         <h2 class="card-title">Projects</h2>
       </v-card-title>
       <v-card-text class="mt-3">
-        <v-row v-for="project in projects" class="mt-1">
+        <v-row v-for="project in projects" :key="project.name" class="project-item">
           <v-col>
-            <p><a :href="project.link" target="_blank" v-html="project.name" style="font-size: 17px"></a></p>
-            <p v-html="project.description" style="font-size: 14px; color: #999; margin-top: 2px;"></p>
-            <p v-html="project.time" style="font-size: 14px; color: #999; margin-top: 2px;"></p>
+            <p><a :href="project.link" target="_blank" rel="noopener noreferrer" v-html="project.name" class="project-title"></a></p>
+            <p v-html="project.description" class="project-description"></p>
+            <p v-html="project.time" class="project-time"></p>
           </v-col>
         </v-row>
       </v-card-text>
@@ -196,12 +355,15 @@ import { projects } from "@/data/projects"
   <v-divider class="mt-10"></v-divider>
   <v-row class="mt-1" justify="center">
     <v-col align-self="center">
-      <p style="text-align: center; font-size: 12px; color: #aaa; line-height: 1.5;">
-        <v-icon icon="mdi-xml"></v-icon> with <v-icon icon="mdi-heart"></v-icon> by Shengyu Liu <br />
-        Built on <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a> and <a href="https://vuetifyjs.com/" target="_blank">Vuetify</a> <br />
-        Feel free to steal this website's source code at <a href="https://github.com/interestingLSY/interestingLSY.github.io" target="_blank">GitHub</a>
+      <p class="site-footer">
+        © 2026 Yuzheng Liu · Built with
+        <a href="https://v3.vuejs.org/" target="_blank" rel="noopener noreferrer">Vue 3</a>
+        and
+        <a href="https://vuetifyjs.com/" target="_blank" rel="noopener noreferrer">Vuetify</a>
+        · Source on
+        <a href="https://github.com/Ly-kc/Ly-kc.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
       </p>
-      <p style="text-align: center; font-size: 12px; margin-top: 4px;">
+      <p class="visitor-count">
         <v-icon icon="mdi-eye-outline" size="14"></v-icon>
         <img
           src="https://visitor-badge.laobi.icu/badge?page_id=Ly-kc.ly-kc.github.io"

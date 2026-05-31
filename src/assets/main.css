@@ -25,6 +25,319 @@ p {
 	line-height: 1.4;
 }
 
+.profile-section {
+  padding-top: 1.5rem;
+}
+
+.profile-photo-wrap {
+  width: 90%;
+  max-width: 260px;
+}
+
+.profile-photo {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.profile-title {
+  text-align: center;
+}
+
+.profile-block {
+  margin-top: 14px;
+}
+
+.section-label {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.profile-copy,
+.interest-list {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.interest-list {
+  padding-left: 18px;
+}
+
+.contact-links {
+  text-align: center;
+}
+
+.contact-links p {
+  font-size: 15px;
+}
+
+.publication-row {
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.publication-image-col {
+  max-width: 280px;
+}
+
+.publication-image {
+  max-width: 280px;
+}
+
+.publication-title {
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.publication-title-row {
+  line-height: 1.35;
+}
+
+.publication-authors {
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.publication-status {
+  color: #3f4a56;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-top: 6px;
+}
+
+.publication-status .venue-chip,
+.publication-status .venue-highlight {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  margin-right: 6px;
+  padding: 4px 9px;
+  vertical-align: 0.04em;
+  white-space: nowrap;
+}
+
+.publication-status .venue-chip {
+  background: #e9f2ff;
+  border: 1px solid #bdd8ff;
+  color: #155dbb;
+}
+
+.publication-status .venue-highlight {
+  background: #fff3d7;
+  border: 1px solid #ffd487;
+  color: #835300;
+}
+
+.publication-status .venue-secondary {
+  color: #4a5663;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.publication-status .venue-secondary b {
+  color: #2f3740;
+  font-weight: 700;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.publication-extra-link {
+  margin-left: 2px;
+}
+
+.github-star-badge {
+  align-items: center;
+  background: #dcecff;
+  border-radius: 999px;
+  color: #0b63ff;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 4px;
+  line-height: 1;
+  margin-left: 8px;
+  padding: 4px 10px;
+  transition: background-color 0.2s;
+  vertical-align: 0.08em;
+  white-space: nowrap;
+}
+
+.github-star-badge span {
+  font-weight: 700;
+}
+
+.github-star-badge:hover {
+  background-color: #cfe4ff !important;
+}
+
+.publication-description {
+  color: #777;
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+.publication-note {
+  color: #888;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.experience-timeline {
+  position: relative;
+}
+
+.experience-fork-lines {
+  bottom: 0;
+  fill: none;
+  height: 100%;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  stroke: #d5d5d5;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+  stroke-width: 2;
+  top: 0;
+  width: 76px;
+  z-index: 0;
+}
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  min-height: 138px;
+  position: relative;
+  z-index: 1;
+}
+
+.experience-marker {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.experience-badge {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  font-size: 13px;
+  font-weight: 700;
+  height: 62px;
+  justify-content: center;
+  letter-spacing: 0;
+  position: relative;
+  width: 62px;
+  z-index: 2;
+}
+
+.experience-logo {
+  display: block;
+  max-height: 38px;
+  max-width: 38px;
+  object-fit: contain;
+}
+
+.experience-badge-ant .experience-logo {
+  max-height: 34px;
+  max-width: 34px;
+}
+
+.experience-badge-pku {
+  color: #9b0000;
+}
+
+.experience-badge-ant {
+  color: #1677ff;
+}
+
+.experience-content {
+  background: #fff;
+  padding-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.experience-period {
+  color: #888;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.experience-organization {
+  color: #222;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.experience-role {
+  color: #222;
+  font-size: 18px;
+  line-height: 1.35;
+  margin: 6px 0 0;
+}
+
+.experience-description {
+  color: #888;
+  font-size: 16px;
+  line-height: 1.45;
+  margin: 10px 0 0;
+}
+
+.project-item {
+  margin-top: 8px;
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.project-description {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.55;
+  margin-top: 3px;
+  max-width: 680px;
+}
+
+.project-time {
+  color: #888;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.site-footer {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.visitor-count {
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: center;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
@@ -52,4 +365,159 @@ p {
 
 #card-awards b {
   color: #d00 !important;
+}
+
+@media (max-width: 959px) {
+  .v-main {
+    padding-top: 0 !important;
+  }
+
+  #app {
+    padding: 0.75rem 1.25rem 5rem;
+  }
+
+  .profile-section {
+    padding-top: 1.25rem;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .mobile-avatar {
+    margin: 0 auto;
+  }
+
+  .profile-card .v-card-item {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .profile-card .v-card-text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .profile-card,
+  .profile-card .v-card-item,
+  .profile-card .v-card-text {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .profile-title {
+    font-size: 29px;
+    line-height: 1.2;
+  }
+
+  .profile-copy,
+  .interest-list {
+    font-size: 15px;
+    line-height: 1.65;
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .interest-list li {
+    padding-right: 2px;
+  }
+
+  .publication-row {
+    align-items: flex-start;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 34px;
+  }
+
+  .project-item {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .publication-image-col {
+    max-width: none;
+    padding-bottom: 4px;
+  }
+
+  .publication-image {
+    max-width: min(100%, 300px);
+  }
+
+  .publication-title {
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .publication-title-row {
+    line-height: 1.35;
+  }
+
+  .publication-description {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .experience-fork-lines {
+    width: 58px;
+  }
+
+  .experience-item {
+    grid-template-columns: 58px minmax(0, 1fr);
+    min-height: 128px;
+  }
+
+  .experience-marker {
+    justify-content: flex-start;
+  }
+
+  .experience-badge {
+    font-size: 11px;
+    height: 50px;
+    width: 50px;
+  }
+
+  .experience-logo {
+    max-height: 31px;
+    max-width: 31px;
+  }
+
+  .experience-badge-ant .experience-logo {
+    max-height: 28px;
+    max-width: 28px;
+  }
+
+  .experience-period {
+    font-size: 13px;
+    letter-spacing: 1.5px;
+  }
+
+  .experience-organization {
+    font-size: 20px;
+  }
+
+  .experience-role {
+    font-size: 16px;
+  }
+
+  .experience-description {
+    font-size: 15px;
+  }
+
+  .project-description {
+    color: #555;
+  }
+
+  .mobile-navigation {
+    border-top: 1px solid #eee;
+  }
+
+  .mobile-navigation .v-btn {
+    min-width: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .mobile-navigation .v-btn__content span {
+    font-size: 11px;
+  }
 }
