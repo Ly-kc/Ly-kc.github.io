@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue"
 import { awards } from "@/data/awards"
 import { publications } from "@/data/publications"
 import { projects } from "@/data/projects"
-
 </script>
 
 <template>
@@ -203,9 +201,14 @@ import { projects } from "@/data/projects"
         Built on <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a> and <a href="https://vuetifyjs.com/" target="_blank">Vuetify</a> <br />
         Feel free to steal this website's source code at <a href="https://github.com/interestingLSY/interestingLSY.github.io" target="_blank">GitHub</a>
       </p>
-      <!-- <p style="text-align: center;" class="mt-2">
-        <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fly-kc.github.io&count_bg=%2388EEFF&title_bg=%23DDDDDD&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true"/></a>
-      </p> -->
+      <p style="text-align: center; font-size: 12px; margin-top: 4px;">
+        <v-icon icon="mdi-eye-outline" size="14"></v-icon>
+        <img
+          src="https://visitor-badge.laobi.icu/badge?page_id=Ly-kc.ly-kc.github.io"
+          alt="Page views"
+          style="vertical-align: middle; margin-left: 4px;"
+        />
+      </p>
     </v-col>
   </v-row>
 </template>

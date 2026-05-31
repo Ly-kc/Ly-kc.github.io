@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+    "predeploy": "npm run clean && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
