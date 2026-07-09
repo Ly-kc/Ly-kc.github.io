@@ -220,12 +220,12 @@ onBeforeUnmount(() => {
           :key="publication.title"
           class="publication-row"
         >
-          <v-col cols="12" md="3" class="publication-image-col">
+          <v-col cols="12" md="4" class="publication-image-col">
             <v-img :src="publication.img_path" class="publication-image"></v-img>
           </v-col>
           <v-divider vertical class="d-none d-md-block"></v-divider>
 
-          <v-col cols="12" md="9" class="publication-content">
+          <v-col cols="12" md="8" class="publication-content">
             <div class="publication-title-row">
               <a :href="publication.link" target="_blank" rel="noopener noreferrer" v-html="publication.title" class="publication-title"></a>
               <a
@@ -242,24 +242,48 @@ onBeforeUnmount(() => {
             </div>
             <p v-html="publication.authors" class="publication-authors"></p>
             <p v-html="publication.submit_status" class="publication-status"></p>
-            <v-row v-if="publication.arxiv || publication.page || publication.code" class="publication-links">
-              <v-col v-if="publication.arxiv" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.arxiv" target="_blank" rel="noopener noreferrer">ArXiv</a>
-              </v-col>
-              <v-col v-if="publication.page" cols="auto" style="margin-right: 2px;">
-                <a :href="publication.page" target="_blank" rel="noopener noreferrer">Project Page</a>
-              </v-col>
-              <v-col v-if="publication.code" cols="auto">
-                <a :href="publication.code" target="_blank" rel="noopener noreferrer">Code</a>
-              </v-col>
-              <v-col v-if="publication.other_links" cols="auto">
-                <v-row v-for="(link, name) in publication.other_links" :key="name" class="publication-extra-link">
-                  <v-col cols="auto">
-                    <a :href="link" target="_blank" rel="noopener noreferrer">{{ name }}</a>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-row>
+            <div
+              v-if="publication.page || publication.code || publication.other_links || publication.arxiv"
+              class="publication-links"
+            >
+              <a
+                v-if="publication.page"
+                :href="publication.page"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="publication-link"
+              >
+                Project Page
+              </a>
+              <a
+                v-if="publication.code"
+                :href="publication.code"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="publication-link"
+              >
+                Code
+              </a>
+              <a
+                v-for="(link, name) in publication.other_links"
+                :key="name"
+                :href="link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="publication-link"
+              >
+                {{ name }}
+              </a>
+              <a
+                v-if="publication.arxiv"
+                :href="publication.arxiv"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="publication-link"
+              >
+                ArXiv
+              </a>
+            </div>
             <p v-html="publication.description" class="publication-description"></p>
           </v-col>
         </v-row>

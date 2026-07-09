@@ -78,11 +78,21 @@ p {
 }
 
 .publication-image-col {
-  max-width: 280px;
+  max-width: 360px;
+  overflow: hidden;
+  padding-left: 4px;
+  padding-right: 18px;
 }
 
 .publication-image {
-  max-width: 280px;
+  height: 198px;
+  margin-left: -4px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.publication-image .v-img__img {
+  object-fit: contain;
 }
 
 .publication-title {
@@ -92,32 +102,46 @@ p {
 }
 
 .publication-title-row {
+  display: block;
   line-height: 1.35;
 }
 
+.publication-content {
+  min-width: 0;
+}
+
 .publication-authors {
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 2px;
 }
 
+.publication-authors b {
+  font-weight: 700;
+}
+
 .publication-status {
+  align-items: center;
   color: #3f4a56;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 15px;
-  line-height: 1.9;
-  margin-top: 6px;
+  gap: 8px 6px;
+  line-height: 1.35;
+  margin-bottom: 2px;
+  margin-top: 8px;
+  overflow: visible;
 }
 
 .publication-status .venue-chip,
-.publication-status .venue-highlight {
+.publication-status .venue-highlight,
+.publication-status .venue-secondary {
   align-items: center;
-  border-radius: 999px;
+  border-radius: 7px;
   display: inline-flex;
   font-size: 14px;
   font-weight: 700;
   line-height: 1;
-  margin-right: 6px;
-  padding: 4px 9px;
-  vertical-align: 0.04em;
+  padding: 5px 10px;
   white-space: nowrap;
 }
 
@@ -134,24 +158,45 @@ p {
 }
 
 .publication-status .venue-secondary {
-  color: #4a5663;
-  font-size: 15px;
-  font-weight: 600;
+  background: #f4f7fa;
+  border: 1px solid #dbe3ea;
+  color: #3d4a56;
+  gap: 4px;
 }
 
 .publication-status .venue-secondary b {
-  color: #2f3740;
+  color: inherit;
   font-weight: 700;
 }
 
 .publication-links {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  gap: 8px;
   font-size: 15px;
+  margin-top: 8px;
 }
 
-.publication-extra-link {
-  margin-left: 2px;
+.publication-links a {
+  align-items: center;
+  background: #f5f9fc !important;
+  border: 1px solid #d7e7f2 !important;
+  border-radius: 999px;
+  color: #2d8eb8 !important;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 5px 10px;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.publication-links a:hover {
+  background-color: #e9f5fb !important;
+  border-color: #afd5e9;
+  color: #16769f;
 }
 
 .github-star-badge {
@@ -356,6 +401,18 @@ p {
   }
 }
 
+@media (min-width: 960px) {
+  .publication-image-col {
+    flex: 0 0 25.5%;
+    max-width: 25.5%;
+  }
+
+  .publication-content {
+    flex: 1 1 0;
+    max-width: none;
+  }
+}
+
 .card-title {
 	text-decoration: underline;
 	text-decoration-style: dashed;
@@ -440,7 +497,9 @@ p {
   }
 
   .publication-image {
-    max-width: min(100%, 300px);
+    margin-left: 0;
+    max-width: min(100%, 330px);
+    width: min(100%, 330px);
   }
 
   .publication-title {
