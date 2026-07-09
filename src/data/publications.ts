@@ -10,6 +10,7 @@ interface Publication {
 	page?: string;
 	code?: string;
 	github_repo?: string;
+	github_stars?: number;
 	// # optioanl fields, key-value pairs of name-link
 	other_links?: {
 		[key: string]: string;
@@ -29,6 +30,7 @@ const publications: Publication[] = [
 		arxiv: "https://arxiv.org/abs/2607.07534",
 		code: "https://github.com/robbyant/lingbot-world-v2",
 		github_repo: "robbyant/lingbot-world-v2",
+		github_stars: 522,
 		page: "https://technology.robbyant.com/lingbot-world-v2"
 	},
 	{
@@ -43,6 +45,7 @@ const publications: Publication[] = [
 		arxiv: "https://arxiv.org/abs/2412.09401",
 		code: "https://github.com/PKU-VCL-3DV/SLAM3R",
 		github_repo: "PKU-VCL-3DV/SLAM3R",
+		github_stars: 1190,
 		other_links: {
 			"机器之心(Chinese)": "https://mp.weixin.qq.com/s/fK5vJwbogcfwoduI9FuQ6w",
 		}

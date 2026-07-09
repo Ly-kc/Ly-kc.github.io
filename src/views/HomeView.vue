@@ -10,10 +10,20 @@ const timelineRef = ref<HTMLElement | null>(null)
 const experienceBadges = ref<(HTMLElement | null)[]>([])
 const forkBox = ref({ width: 76, height: 1 })
 const forkPaths = ref<string[]>([])
-const githubStars = ref<Record<string, number | null | undefined>>({})
+const githubStars = ref<Record<string, number | null | undefined>>(getInitialGithubStars())
 let timelineObserver: ResizeObserver | undefined
 
 const forkViewBox = computed(() => `0 0 ${forkBox.value.width} ${forkBox.value.height}`)
+
+function getInitialGithubStars() {
+  return publications.reduce<Record<string, number>>((stars, publication) => {
+    if (publication.github_repo && publication.github_stars !== undefined) {
+      stars[publication.github_repo] = publication.github_stars
+    }
+
+    return stars
+  }, {})
+}
 
 function formatStarCount(count: number | null | undefined) {
   if (count === undefined) {
@@ -28,16 +38,14 @@ function formatStarCount(count: number | null | undefined) {
 }
 
 async function fetchGithubStars() {
-  const repos = publications
+  const repos = [...new Set(publications
     .map((publication) => publication.github_repo)
-    .filter((repo): repo is string => Boolean(repo))
+    .filter((repo): repo is string => Boolean(repo)))]
 
   await Promise.all(repos.map(async (repo) => {
-    if (githubStars.value[repo] !== undefined) {
-      return
+    if (githubStars.value[repo] === undefined) {
+      githubStars.value = { ...githubStars.value, [repo]: undefined }
     }
-
-    githubStars.value = { ...githubStars.value, [repo]: undefined }
 
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}`)
@@ -49,7 +57,9 @@ async function fetchGithubStars() {
       const data = await response.json() as { stargazers_count?: number }
       githubStars.value = { ...githubStars.value, [repo]: data.stargazers_count ?? null }
     } catch {
-      githubStars.value = { ...githubStars.value, [repo]: null }
+      if (githubStars.value[repo] === undefined) {
+        githubStars.value = { ...githubStars.value, [repo]: null }
+      }
     }
   }))
 }
