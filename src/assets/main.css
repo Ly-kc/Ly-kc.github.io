@@ -347,27 +347,75 @@ p {
   margin: 10px 0 0;
 }
 
-.project-item {
-  margin-top: 8px;
+.research-preview-link {
+  display: block;
 }
 
-.project-title {
-  font-size: 17px;
-  font-weight: 600;
+.research-preview-link:hover {
+  background: transparent;
 }
 
-.project-description {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.55;
-  margin-top: 3px;
-  max-width: 680px;
+.research-preview-link:focus-visible {
+  outline: 2px solid #2d8eb8;
+  outline-offset: 4px;
 }
 
-.project-time {
-  color: #888;
-  font-size: 13px;
-  margin-top: 4px;
+.static-preview {
+  margin: 0;
+}
+
+.publication-image-captioned {
+  height: auto;
+  margin-left: 0;
+}
+
+.sequence-preview {
+  margin: 0;
+  width: 100%;
+}
+
+/* Allow the grid's negative gutters to extend past the card content. */
+#card-projects .v-card-item__content {
+  overflow: visible;
+}
+
+.sequence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.sequence-frame {
+  position: relative;
+}
+
+.sequence-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+}
+
+.sequence-frame span {
+  position: absolute;
+  bottom: 4px;
+  left: 8px;
+  border-radius: 3px;
+  background: rgb(0 0 0 / 45%);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  padding: 3px 5px;
+}
+
+.sequence-preview figcaption,
+.static-preview figcaption {
+  color: #777;
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 6px;
+  text-align: center;
 }
 
 .site-footer {
@@ -486,14 +534,13 @@ p {
     margin-bottom: 34px;
   }
 
-  .project-item {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   .publication-image-col {
     max-width: none;
     padding-bottom: 4px;
+  }
+
+  .sequence-preview {
+    max-width: 330px;
   }
 
   .publication-image {
@@ -560,10 +607,6 @@ p {
 
   .experience-description {
     font-size: 15px;
-  }
-
-  .project-description {
-    color: #555;
   }
 
   .mobile-navigation {

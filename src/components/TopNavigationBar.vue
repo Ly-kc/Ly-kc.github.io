@@ -2,9 +2,9 @@
 const navItems = [
 	{ title: "Home", shortTitle: "Home", href: "/#card-overview", icon: "mdi-home" },
 	{ title: "Publications", shortTitle: "Pubs", href: "/#card-publications", icon: "mdi-bookshelf" },
+	{ title: "Projects", shortTitle: "Projects", href: "/#card-projects", icon: "mdi-hammer-screwdriver" },
 	{ title: "Education", shortTitle: "Edu.", href: "/#card-education", icon: "mdi-timeline-text-outline" },
 	{ title: "Awards", shortTitle: "Awards", href: "/#card-awards", icon: "mdi-license" },
-	{ title: "Projects", shortTitle: "Projects", href: "/#card-projects", icon: "mdi-hammer-screwdriver" },
 ]
 </script>
 

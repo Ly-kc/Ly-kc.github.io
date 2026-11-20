@@ -3,6 +3,11 @@ interface Publication {
 	authors: string;
 	time: string;
 	img_path: string;
+	img_alt?: string;
+	preview_frames?: string[];
+	preview_sequences?: { frames: string[]; alt: string; caption: string }[];
+	preview_aspect_ratio?: number;
+	preview_caption?: string;
 	description: string;
 	submit_status: string;
 	link: string;
@@ -19,21 +24,6 @@ interface Publication {
 
 const publications: Publication[] = [
 	{
-		title: "Lingbot-World-v2: Infinite Worlds with Versatile Interactions",
-		authors: "<b>Robbyant Team</b>",
-		time: "2026.7",
-		// img_path: "/publications/SLAM3R.jpg",
-		img_path: "/publications/world.gif",
-		description: "LingBot-World-Infinity generates open-ended interactive worlds that remain visually coherent over long horizons while running in real time at 720p and 60 fps with sub-second control latency.",
-		submit_status: "<span class='venue-chip'>Technical Report 2026</span>",
-		link: "https://technology.robbyant.com/lingbot-world-v2",
-		arxiv: "https://arxiv.org/abs/2607.07534",
-		code: "https://github.com/robbyant/lingbot-world-v2",
-		github_repo: "robbyant/lingbot-world-v2",
-		github_stars: 522,
-		page: "https://technology.robbyant.com/lingbot-world-v2"
-	},
-	{
 		title: "SLAM3R: Real-Time Dense Scene Reconstruction from Monocular RGB Videos",
 		authors: "<b>Yuzheng Liu</b>*, <a href='https://siyandong.github.io/'>Siyan Dong*†</a>, <a href='https://ffrivera0.github.io/'>Shuzhe Wang</a>, <a href='https://yd-yin.github.io/'>Yingda Yin</a>, <a href='https://yanchaoyang.github.io/'>Yanchao Yang†</a>, <a href='https://fqnchina.github.io/'>Qingnan Fan</a>, <a href='https://baoquanchen.info/'>Baoquan Chen†</a>",
 		time: "2024.12",
@@ -45,7 +35,7 @@ const publications: Publication[] = [
 		arxiv: "https://arxiv.org/abs/2412.09401",
 		code: "https://github.com/PKU-VCL-3DV/SLAM3R",
 		github_repo: "PKU-VCL-3DV/SLAM3R",
-		github_stars: 1190,
+		github_stars: 1385,
 		other_links: {
 			"机器之心(Chinese)": "https://mp.weixin.qq.com/s/fK5vJwbogcfwoduI9FuQ6w",
 		}

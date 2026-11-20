@@ -5,6 +5,9 @@ import { awards } from "@/data/awards"
 import { experiences } from "@/data/experience"
 import { publications } from "@/data/publications"
 import { projects } from "@/data/projects"
+import ResearchEntry from "@/components/ResearchEntry.vue"
+
+const researchWorks = [...publications, ...projects]
 
 const timelineRef = ref<HTMLElement | null>(null)
 const experienceBadges = ref<(HTMLElement | null)[]>([])
@@ -16,7 +19,7 @@ let timelineObserver: ResizeObserver | undefined
 const forkViewBox = computed(() => `0 0 ${forkBox.value.width} ${forkBox.value.height}`)
 
 function getInitialGithubStars() {
-  return publications.reduce<Record<string, number>>((stars, publication) => {
+  return researchWorks.reduce<Record<string, number>>((stars, publication) => {
     if (publication.github_repo && publication.github_stars !== undefined) {
       stars[publication.github_repo] = publication.github_stars
     }
@@ -25,20 +28,8 @@ function getInitialGithubStars() {
   }, {})
 }
 
-function formatStarCount(count: number | null | undefined) {
-  if (count === undefined) {
-    return "..."
-  }
-
-  if (count === null) {
-    return "--"
-  }
-
-  return String(count)
-}
-
 async function fetchGithubStars() {
-  const repos = [...new Set(publications
+  const repos = [...new Set(researchWorks
     .map((publication) => publication.github_repo)
     .filter((repo): repo is string => Boolean(repo)))]
 
@@ -169,24 +160,18 @@ onBeforeUnmount(() => {
               </p>
               <ul class="interest-list">
                 <li>
-                  <span style="font-weight: 600;">3D Perception.</span>
+                  <span style="font-weight: 600;">3D Perception &amp; Spatial Understanding.</span>
                   <span>
-                    Developing robust 3D perception systems for real-time scene reconstruction, segmentation,
-                    and spatial understanding from long-range visual inputs.
+                    Developing real-time 3D perception models for scene reconstruction and understanding from
+                    visual streams. Building structured 3D representations and memories that multimodal models
+                    can readily use for spatial reasoning and navigation.
                   </span>
                 </li>
                 <li style="margin-top: 4px;">
-                  <span style="font-weight: 600;">Interactive Video Generation.</span>
+                  <span style="font-weight: 600;">World Modeling &amp; Simulation.</span>
                   <span>
-                    Exploring controllable and temporally consistent video generation models that can simulate
-                    dynamic worlds and support interactive prediction.
-                  </span>
-                </li>
-                <li style="margin-top: 4px;">
-                  <span style="font-weight: 600;">Multimodal Spatial Intelligence.</span>
-                  <span>
-                    Building multimodal LLM that connect language, visual and geometric understanding for
-                    spatial reasoning and embodied tasks in complex environments.
+                    Developing video generation models that capture world dynamics and support interactive
+                    simulation, alongside unified multimodal models for visual understanding and prediction.
                   </span>
                 </li>
               </ul>
@@ -225,81 +210,31 @@ onBeforeUnmount(() => {
       </v-card-title>
       <v-card-item>
 
-        <v-row
+        <ResearchEntry
           v-for="publication in publications"
           :key="publication.title"
-          class="publication-row"
-        >
-          <v-col cols="12" md="4" class="publication-image-col">
-            <v-img :src="publication.img_path" class="publication-image"></v-img>
-          </v-col>
-          <v-divider vertical class="d-none d-md-block"></v-divider>
-
-          <v-col cols="12" md="8" class="publication-content">
-            <div class="publication-title-row">
-              <a :href="publication.link" target="_blank" rel="noopener noreferrer" v-html="publication.title" class="publication-title"></a>
-              <a
-                v-if="publication.github_repo && publication.code"
-                :href="publication.code"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="github-star-badge"
-              >
-                <span>Github</span>
-                <v-icon icon="mdi-star-outline" size="16"></v-icon>
-                <span>{{ formatStarCount(githubStars[publication.github_repo]) }}</span>
-              </a>
-            </div>
-            <p v-html="publication.authors" class="publication-authors"></p>
-            <p v-html="publication.submit_status" class="publication-status"></p>
-            <div
-              v-if="publication.page || publication.code || publication.other_links || publication.arxiv"
-              class="publication-links"
-            >
-              <a
-                v-if="publication.page"
-                :href="publication.page"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="publication-link"
-              >
-                Project Page
-              </a>
-              <a
-                v-if="publication.code"
-                :href="publication.code"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="publication-link"
-              >
-                Code
-              </a>
-              <a
-                v-for="(link, name) in publication.other_links"
-                :key="name"
-                :href="link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="publication-link"
-              >
-                {{ name }}
-              </a>
-              <a
-                v-if="publication.arxiv"
-                :href="publication.arxiv"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="publication-link"
-              >
-                ArXiv
-              </a>
-            </div>
-            <p v-html="publication.description" class="publication-description"></p>
-          </v-col>
-        </v-row>
-
+          :work="publication"
+          :github-stars="githubStars"
+        />
 
         <p class="publication-note">*: Equal contribution; †: Corresponding author</p>
+      </v-card-item>
+    </v-card-item>
+  </v-card>
+
+  <v-card variant="text" class="mt-4" id="card-projects">
+    <v-card-item>
+      <v-card-title>
+        <h2 class="card-title">Projects</h2>
+      </v-card-title>
+      <v-card-item>
+        <ResearchEntry
+          v-for="project in projects"
+          :key="project.title"
+          :work="project"
+          :github-stars="githubStars"
+        />
+        <p class="publication-note">*: Equal contribution (co-first authors)</p>
       </v-card-item>
     </v-card-item>
   </v-card>
@@ -356,23 +291,6 @@ onBeforeUnmount(() => {
             <p style="font-size: 13px; white-space: normal; text-wrap: wrap; color: #999" v-html="award.year + (award.description ? ', ' : '') + award.description"></p>
           </v-list-item>
         </v-list>
-      </v-card-text>
-    </v-card-item>
-  </v-card>
-
-  <v-card variant="text" class="mt-2" id="card-projects">
-    <v-card-item>
-      <v-card-title>
-        <h2 class="card-title">Projects</h2>
-      </v-card-title>
-      <v-card-text class="mt-3">
-        <v-row v-for="project in projects" :key="project.name" class="project-item">
-          <v-col>
-            <p><a :href="project.link" target="_blank" rel="noopener noreferrer" v-html="project.name" class="project-title"></a></p>
-            <p v-html="project.description" class="project-description"></p>
-            <p v-html="project.time" class="project-time"></p>
-          </v-col>
-        </v-row>
       </v-card-text>
     </v-card-item>
   </v-card>
